@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, CHAR, Date, func, Enum, DateTime
+from sqlalchemy import Column, Integer, String, CHAR, Date, func, Enum, DateTime, ForeignKey
 
 from database import Base, BaseEnum
 
@@ -28,3 +28,11 @@ class User(Base):
     date_of_birth = Column(Date, server_default=func.current_date(), nullable=False)
     avatar_url = Column(String(40), default="media/default.png")
     creation_at = Column(DateTime, default=func.current_time(), nullable=False)
+
+
+class Token(Base):
+    __tablename__ = "tokens"
+
+    id = Column(Integer, primary_key=True)
+    token = Column(String(256), unique=True, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"))
