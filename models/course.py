@@ -2,8 +2,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    CHAR,
-    Date,
     func,
     Enum,
     DateTime,
