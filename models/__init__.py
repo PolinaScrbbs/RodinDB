@@ -1,1 +1,1 @@
-from .user import Base
+from .course import Base
