@@ -7,8 +7,10 @@ from sqlalchemy import (
     func,
     Enum,
     DateTime,
-    ForeignKey, Boolean,
+    ForeignKey,
+    Boolean,
 )
+from sqlalchemy.orm import object_session, validates, relationship
 
 from database import Base, BaseEnum
 
@@ -35,10 +37,26 @@ class User(Base):
     patronymic = Column(String(30), default=None)
     role = Column(Enum(Role), default=Role.USER, nullable=False)
     gender = Column(Enum(Gender), default=Gender.MALE, nullable=False)
+    trainer_id = Column(Integer, ForeignKey("users.id"), default=None)
     date_of_birth = Column(Date, server_default=func.current_date(), nullable=False)
     is_regular_client = Column(Boolean, default=False, nullable=False)
     avatar_url = Column(String(40), default="media/default.png")
     creation_at = Column(DateTime, default=func.current_time(), nullable=False)
+
+    @validates("trainer_id")
+    def validate_trainer_id(self, trainer_id):
+        if trainer_id is not None:
+            session = object_session(self)
+            trainer = session.query(User).filter_by(id=trainer_id).first()
+            if not trainer:
+                raise ValueError(f"Тренер с id={trainer_id} не найден.")
+            if trainer.role != Role.TRAINER:
+                raise ValueError(
+                    f"Пользователь с id={trainer_id} не является тренером."
+                )
+        return trainer_id
+
+    trainer = relationship("User", remote_side=[id], backref="clients")
 
 
 class Token(Base):
