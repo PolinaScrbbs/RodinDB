@@ -9,7 +9,7 @@ from sqlalchemy import (
     Table,
 )
 
-from database import Base, BaseEnum
+from .user import Base, BaseEnum
 
 
 class CourseType(BaseEnum):
@@ -24,7 +24,7 @@ class Course(Base):
     title = Column(String(30), unique=True, nullable=False)
     description = Column(String(120), nullable=False)
     type = Column(Enum(CourseType), default=CourseType.TRAINING, nullable=False)
-    creation_at = Column(DateTime, default=func.current_time(), nullable=False)
+    creation_at = Column(DateTime, default=func.now(), nullable=False)
     last_update_at = Column(DateTime, default=None)
 
 

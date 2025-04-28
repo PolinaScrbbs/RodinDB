@@ -7,7 +7,7 @@ from sqlalchemy import (
     ForeignKey,
 )
 
-from database import Base
+from .course import Base
 
 
 class CourseResult(Base):

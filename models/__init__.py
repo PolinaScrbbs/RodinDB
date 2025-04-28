@@ -1,1 +1,1 @@
-from .course import Base
+from .result import Base

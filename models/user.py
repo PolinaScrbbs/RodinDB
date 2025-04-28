@@ -7,7 +7,7 @@ from sqlalchemy import (
     func,
     Enum,
     DateTime,
-    ForeignKey,
+    ForeignKey, Boolean,
 )
 
 from database import Base, BaseEnum
@@ -36,6 +36,7 @@ class User(Base):
     role = Column(Enum(Role), default=Role.USER, nullable=False)
     gender = Column(Enum(Gender), default=Gender.MALE, nullable=False)
     date_of_birth = Column(Date, server_default=func.current_date(), nullable=False)
+    is_regular_client = Column(Boolean, default=False, nullable=False)
     avatar_url = Column(String(40), default="media/default.png")
     creation_at = Column(DateTime, default=func.current_time(), nullable=False)
 
