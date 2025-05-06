@@ -1,1 +1,1 @@
-from .applications import Base
+from .training_plan import Base
