@@ -13,9 +13,8 @@ from sqlalchemy import (
     Interval,
 )
 
-from utils import get_start_date, get_end_date
 from .applications import Base, BaseEnum
-
+from ..utils import get_start_date, get_end_date
 
 training_plan_clients = Table(
     "training_plan_clients",

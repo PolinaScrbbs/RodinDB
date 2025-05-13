@@ -12,7 +12,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import object_session, validates, relationship
 
-from database import Base, BaseEnum
+from app.database import Base, BaseEnum
 
 
 class Role(BaseEnum):
@@ -41,7 +41,7 @@ class User(Base):
     date_of_birth = Column(Date, server_default=func.current_date(), nullable=False)
     is_regular_client = Column(Boolean, default=False, nullable=False)
     avatar_url = Column(String(40), default="media/default.png")
-    creation_at = Column(DateTime, default=func.current_time(), nullable=False)
+    creation_at = Column(DateTime, default=func.now(), nullable=False)
 
     @validates("trainer_id")
     def validate_trainer_id(self, trainer_id):

@@ -9,7 +9,7 @@ from sqlalchemy import (
     func,
 )
 
-from database import BaseEnum
+from app.database import BaseEnum
 from .experience import Base
 
 

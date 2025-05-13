@@ -13,6 +13,8 @@ class Config:
         self.password = os.getenv("PASSWORD", None)
         self.name = os.getenv("NAME", "RodinDB")
 
+        self.secret = os.getenv("SECRET_KEY", None)
+
         self.database_url = f"postgresql+asyncpg://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
 
     @staticmethod
@@ -22,6 +24,8 @@ class Config:
         os.environ.pop("USER", None)
         os.environ.pop("PASSWORD", None)
         os.environ.pop("NAME", None)
+
+        os.environ.pop("SECRET_KEY", None)
 
 
 config = Config()

@@ -5,8 +5,8 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from config import config as conf
-from models import Base
+from app.config import config as conf
+from app.models import Base
 
 alembic_config = context.config
 section = alembic_config.config_ini_section

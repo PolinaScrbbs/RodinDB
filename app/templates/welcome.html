@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock styles %}
+
+{% block content %}
+<div class="form-container">
+    <h2>С возвращением, {{ full_name }}!</h2>
+    <p>Рады снова видеть вас в системе.</p>
+</div>
+{% endblock %}
